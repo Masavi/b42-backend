@@ -1,2 +1,4 @@
-// eslint-disable-next-line no-console
-console.log('los scripts funcionan!');
+/* eslint-disable no-console */
+const { api, PORT } = require('./api');
+
+api.listen(PORT, () => console.log(`Listening on ${PORT}`));
