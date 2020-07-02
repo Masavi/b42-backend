@@ -1,16 +1,10 @@
 const express = require('express');
 
 const router = express.Router();
-const { User } = require('../models');
+
+const { UserController } = require('../controllers');
 
 // ES6
-router.post('/api/v1/users', async (req, res) => {
-  try {
-    const user = await new User(req.body).save();
-    res.status(201).json(user);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
+router.post('/api/v1/users', UserController.create);
 
 module.exports = router;
