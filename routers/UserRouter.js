@@ -11,4 +11,7 @@ router.post('/users',
 router.get('/users',
   UserController.findAll);
 
+router.get('/users/:id',
+  UserValidator.findOne, UserController.findOne);
+
 module.exports = router;
