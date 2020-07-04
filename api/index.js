@@ -11,7 +11,7 @@ api.use(express.json({ extended: true }));
 
 api.get('/', (req, res) => res.send('Hello World'));
 
-api.use(require('../routers'));
+api.use('/api/v1', require('../routers'));
 
 api.use(errors());
 
