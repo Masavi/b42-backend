@@ -37,4 +37,15 @@ module.exports = {
       res.status(400).json(err);
     }
   },
+  deleteOne: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const user = await UserService.findOneById(id);
+      if (!user) res.status(404).json({ message: 'User not found' });
+      await UserService.deleteOneById(id);
+      res.status(204).json();
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  },
 };

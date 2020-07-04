@@ -25,4 +25,9 @@ module.exports = {
       password: Joi.string(),
     }),
   }),
+  deleteOne: celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      id: Joi.string().required(),
+    }),
+  }),
 };

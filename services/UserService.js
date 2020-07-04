@@ -8,4 +8,5 @@ module.exports = {
     Object.assign(user, body);
     return user.save();
   },
+  deleteOneById: (id) => User.findByIdAndDelete(id),
 };
