@@ -14,4 +14,7 @@ router.get('/users',
 router.get('/users/:id',
   UserValidator.findOne, UserController.findOne);
 
+router.patch('/users/:id',
+  UserValidator.updateOne, UserController.updateOne);
+
 module.exports = router;

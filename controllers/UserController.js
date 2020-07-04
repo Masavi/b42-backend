@@ -26,4 +26,15 @@ module.exports = {
       res.status(400).json(err);
     }
   },
+  updateOne: async (req, res) => {
+    const { id } = req.params;
+    const { body } = req;
+    try {
+      const user = await UserService.findOneById(id);
+      const modifiedUser = await UserService.updateOne(user, body);
+      res.status(200).json(modifiedUser);
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  },
 };
