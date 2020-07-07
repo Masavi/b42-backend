@@ -1,5 +1,5 @@
 const { UserService } = require('../services');
-const { comparePasswords } = require('../utils');
+const { comparePasswords, createToken } = require('../utils');
 
 module.exports = {
   create: async (req, res) => {
@@ -72,8 +72,9 @@ module.exports = {
       if (!user) res.status(400).json({ message: 'error on credentials' });
       const isValid = comparePasswords(user.password, password);
       if (!isValid) res.status(400).json({ message: 'error on credentials' });
-      // TODO: generar y enviar JWT al cliente
-      res.status(200).json({ message: 'login successful', token: null });
+      const token = createToken(user);
+      if (!token) res.status(500).json({ message: 'error on token creation' });
+      res.status(200).json({ message: 'login successful', token });
     } catch (err) {
       res.status(400).json(err);
     }
