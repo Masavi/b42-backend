@@ -4,8 +4,10 @@ const router = express.Router();
 
 const { UserValidator } = require('../validators');
 const { UserController } = require('../controllers');
+const { verifyToken } = require('../middlewares');
 
 router.post('/users',
+  verifyToken,
   UserValidator.create, UserController.create);
 
 router.get('/users',
