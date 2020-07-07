@@ -3,6 +3,7 @@ const { comparePasswords, createToken } = require('../utils');
 
 module.exports = {
   create: async (req, res) => {
+    // console.log('🔥', req.decoded); -> Aquí puedes acceder al payload del token del usuario
     const { email } = req.body;
     try {
       const userExists = await UserService.findOneByEmail(email);
