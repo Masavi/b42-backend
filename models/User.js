@@ -2,6 +2,7 @@
 /* eslint-disable func-names */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { postSchema } = require('./Post');
 
 const SALT_WORK_FACTOR = 10;
 
@@ -29,27 +30,7 @@ const userSchema = new Schema({
     required: true,
     trim: true,
   },
-  posts: [{
-    title: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    body: {
-      type: String,
-      required: true,
-    },
-    image: String,
-    date: {
-      type: Date,
-      default: Date.now(),
-    },
-    permissions: {
-      type: String,
-      enum: ['PUBLIC', 'PRIVATE'],
-      default: 'PUBLIC',
-    },
-  }],
+  posts: [postSchema],
 }, {
   timestamps: true,
   versionKey: false,
