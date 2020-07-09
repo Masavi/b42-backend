@@ -6,4 +6,5 @@ module.exports = {
     user.posts.push(post);
     return user.save();
   },
+  findOneByIdInUser: (idPost, user) => user.posts.id(idPost),
 };

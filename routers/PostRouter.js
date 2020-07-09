@@ -11,4 +11,7 @@ router.post('/users/:idUser/posts',
 router.get('/users/:idUser/posts',
   PostValidator.findAll, PostController.findAll);
 
+router.get('/users/:idUser/posts/:idPost',
+  PostValidator.findOne, PostController.findOne);
+
 module.exports = router;

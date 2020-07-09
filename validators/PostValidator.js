@@ -18,4 +18,10 @@ module.exports = {
       idUser: Joi.string().required(),
     }),
   }),
+  findOne: celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      idUser: Joi.string().required(),
+      idPost: Joi.string().required(),
+    }),
+  }),
 };
