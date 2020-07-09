@@ -9,6 +9,10 @@ const SALT_WORK_FACTOR = 10;
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
+  is_active: {
+    type: Boolean,
+    default: true,
+  },
   first_name: {
     type: String,
     required: true,
