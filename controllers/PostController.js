@@ -30,7 +30,7 @@ module.exports = {
       const { posts } = user;
 
       // 3) Responder al cliente con los posts del usuario
-      res.status(201).json(posts);
+      res.status(200).json(posts);
     } catch (error) {
       res.status(400).json({ message: 'Error adding post to user', error });
     }
