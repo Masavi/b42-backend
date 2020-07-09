@@ -12,7 +12,7 @@ module.exports = {
       const post = await PostService.create(body);
 
       // 3) Agregar el nuevo post al usuario y salvar el usuario
-      const userWithPost = await UserService.addPost(user, post);
+      const userWithPost = await PostService.addPostToUser(post, user);
 
       // 4) Responder al cliente con el usuario con el nuevo post
       res.status(201).json(userWithPost);
