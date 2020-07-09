@@ -20,4 +20,19 @@ module.exports = {
       res.status(400).json({ message: 'Error adding post to user', error });
     }
   },
+  findAll: async (req, res) => {
+    const { idUser } = req.params;
+    try {
+      // 1) Traemos el usuario
+      const user = await UserService.findOneById(idUser);
+
+      // 2) Sacamos los posts del objeto de usuario
+      const { posts } = user;
+
+      // 3) Responder al cliente con los posts del usuario
+      res.status(201).json(posts);
+    } catch (error) {
+      res.status(400).json({ message: 'Error adding post to user', error });
+    }
+  },
 };

@@ -13,4 +13,9 @@ module.exports = {
       permissions: Joi.string().valid('PUBLIC', 'PRIVATE'),
     }),
   }),
+  findAll: celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      idUser: Joi.string().required(),
+    }),
+  }),
 };
