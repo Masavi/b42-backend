@@ -32,7 +32,7 @@ module.exports = {
       // 3) Responder al cliente con los posts del usuario
       res.status(200).json(posts);
     } catch (error) {
-      res.status(400).json({ message: 'Error adding post to user', error });
+      res.status(400).json({ message: 'Error getting user posts', error });
     }
   },
 };
