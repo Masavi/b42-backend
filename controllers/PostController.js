@@ -27,7 +27,7 @@ module.exports = {
       const user = await UserService.findOneById(idUser);
 
       // 2) Sacamos los posts del objeto de usuario
-      const { posts } = user;
+      const posts = await PostService.getPostsInUser(user);
 
       // 3) Responder al cliente con los posts del usuario
       res.status(200).json(posts);
@@ -68,6 +68,26 @@ module.exports = {
 
       // 4) Responder al cliente con el post modificado
       res.status(200).json(updatedUser.posts.id(idPost));
+    } catch (error) {
+      res.status(400).json({ message: 'Error getting user post by id', error });
+    }
+  },
+  deleteOne: async (req, res) => {
+    const { idUser, idPost } = req.params;
+    try {
+      // 1) Traemos el usuario
+      const user = await UserService.findOneById(idUser);
+      if (!user) res.status(404).json({ message: 'User not found' });
+
+      // 2) Sacamos el post deseado del objeto de usuario
+      const post = PostService.findOneByIdInUser(idPost, user);
+      if (!post) res.status(404).json({ message: 'Post not found' });
+
+      // 3) Actualizamos el post del usuario
+      await PostService.updateOneByIdInUser(idPost, user, { is_active: false });
+
+      // 4) Responder al cliente con el post modificado
+      res.status(204).json();
     } catch (error) {
       res.status(400).json({ message: 'Error getting user post by id', error });
     }

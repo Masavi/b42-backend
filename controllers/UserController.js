@@ -26,6 +26,7 @@ module.exports = {
     const { id } = req.params;
     try {
       const user = await UserService.findOneById(id);
+      if (!user) res.status(404).json({ message: 'User not found' });
       res.status(200).json(user);
     } catch (err) {
       res.status(400).json(err);
@@ -48,7 +49,7 @@ module.exports = {
     try {
       const user = await UserService.findOneById(id);
       if (!user) res.status(404).json({ message: 'User not found' });
-      await UserService.deleteOneById(id);
+      await UserService.updateOne(user, { is_active: false });
       res.status(204).json();
     } catch (err) {
       res.status(400).json(err);

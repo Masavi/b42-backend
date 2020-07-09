@@ -7,7 +7,11 @@ module.exports = {
     user.posts.push(post);
     return user.save();
   },
-  findOneByIdInUser: (idPost, user) => user.posts.id(idPost),
+  findOneByIdInUser: (idPost, user) => {
+    const post = user.posts.id(idPost);
+    if (post.is_active === false) return undefined;
+    return post;
+  },
   updateOneByIdInUser: (idPost, user, body) => {
     const updatedPosts = user.posts.map((post) => {
       if (post._id.toString() === idPost) {
@@ -19,5 +23,9 @@ module.exports = {
     // eslint-disable-next-line no-param-reassign
     user.posts = updatedPosts;
     return user.save();
+  },
+  getPostsInUser: (user) => {
+    const filteredPosts = user.posts.filter((post) => post.is_active === true);
+    return filteredPosts;
   },
 };
