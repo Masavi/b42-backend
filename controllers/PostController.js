@@ -57,6 +57,7 @@ module.exports = {
     try {
       // 1) Traemos el usuario
       const user = await UserService.findOneById(idUser);
+      if (!user) res.status(404).json({ message: 'User not found' });
 
       // 2) Sacamos el post deseado del objeto de usuario
       const post = PostService.findOneByIdInUser(idPost, user);
