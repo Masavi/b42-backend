@@ -14,4 +14,7 @@ router.get('/users/:idUser/posts',
 router.get('/users/:idUser/posts/:idPost',
   PostValidator.findOne, PostController.findOne);
 
+router.patch('/users/:idUser/posts/:idPost',
+  PostValidator.updateOne, PostController.updateOne);
+
 module.exports = router;
