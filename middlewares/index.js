@@ -1,11 +1,6 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = {
-  showDate: (req, res, next) => {
-    const date = new Date();
-    console.log(`🌎 Año de Petición: ${date.getFullYear()}`);
-    next();
-  },
   verifyToken: (req, res, next) => {
     try {
       const { authorization } = req.headers;

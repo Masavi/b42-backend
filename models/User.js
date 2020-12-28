@@ -2,13 +2,12 @@
 /* eslint-disable func-names */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const { postSchema } = require('./Post');
 
 const SALT_WORK_FACTOR = 10;
 
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
   is_active: {
     type: Boolean,
     default: true,
@@ -34,13 +33,12 @@ const userSchema = new Schema({
     required: true,
     trim: true,
   },
-  posts: [postSchema],
 }, {
   timestamps: true,
   versionKey: false,
 });
 
-userSchema.pre('save', function (next) {
+UserSchema.pre('save', function (next) {
   const user = this;
 
   // only hash the password if it has been modified (or is new)
@@ -61,6 +59,6 @@ userSchema.pre('save', function (next) {
   });
 });
 
-const User = mongoose.model('User', userSchema, 'Users');
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;
